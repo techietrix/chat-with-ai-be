@@ -13,7 +13,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: process.env.FRONTEND_URL || "http://localhost:3000",
+        origin:  "*",
         methods: ["GET", "POST"]
     }
 });
@@ -42,7 +42,7 @@ async function getResponse(prompt) {
     }
 }
 io.on('connection', (socket) => {
-    console.log('A user connected');
+    console.log(`${new Date()} A user connected`);
     socket.on('recognized_speech', (data) => {
         console.log(data);
         processAudio(data)
@@ -105,6 +105,7 @@ io.on('connection', (socket) => {
 app.use('/temp', express.static(path.join(__dirname, 'temp')));
 
 app.get('/', (req, res) => {
+    console.log('welcome')
     res.end('Welcome to AI!')
 });
 
