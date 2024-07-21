@@ -104,6 +104,10 @@ io.on('connection', (socket) => {
 
 app.use('/temp', express.static(path.join(__dirname, 'temp')));
 
+app.get('/', (req, res) => {
+    res.end('Welcome to AI!')
+});
+
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
